@@ -5,7 +5,7 @@ import function
 import matplotlib.pyplot as plt
 
 
-def model_stat_eq(quant_el, quant_iter, a = 0.5, d = 0.4, one_rand = 0, end_rand = 1):
+def model_stat_eq(quant_el, quant_iter, a = 0.5, d = 0.4, one_rand = 1.5, end_rand = 2):
     element_x = np.zeros(quant_iter)  # элементы x
     element_y = np.zeros(quant_iter)  # элементы y
 

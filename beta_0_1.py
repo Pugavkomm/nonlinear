@@ -15,36 +15,46 @@ import matplotlib.pyplot as plt
 # данная программа будет моделировать активную среду с кубической нелинейностью
 # с переодическими граничными условиями
 
+# N - количество элементов в цепочке, quant_it - количество итераций
 
-def model_pereod(d=0.5, N = 6, quant_it = 10000):
-    elements = np.zeros((quant_it, N))
-    quantity = np.zeros(quant_it)
-    a = 0.1
-
-    for k in range(N):
-        elements[0][k] = random.uniform(0, 1) # задаем случайные значения параметра среды
+def plot(number_el, quant_el, quant_it):
+    matrix = model_pereod(quant_el, quant_it)
+    y = np.zeros(quant_it)
+    for i in range(quant_it):
+        y[i] = matrix[number_el - 1][i]
+    plt.plot(np.arange(quant_it), y, '.', linestyle = '-', label = "$U_" + str(number_el) + "$")
+    #plt.plot(np.arange(quant_it), y, '.')
+def model_pereod(quant_el, quant_it, d=0.4, a = 0.5, one_rand = 0, end_rand = 1):
+    elements= np.zeros((quant_el, quant_it))
+    #print(elements)
+    for i in range(quant_el):
+        elements[i][0] = random.uniform(one_rand, end_rand) # задаем случайные начальные условия
     for i in range(quant_it - 1):
-        for j in range(N-1):
+        for j in range(quant_el):
             if j == 0:
-                elements[i + 1][j] = function.next_iter(a, d, elements[i][N - 1], elements[i][j], elements[i][j+1])
-            elif j < N - 1:
-                elements[i + 1][j] = function.next_iter(a, d, elements[i][j - 1], elements[i][j], elements[i][j+1])
-            elif j == N-1 :
-                elements[i + 1][j] = function.next_iter(a, d, elements[i][j - 1], elements[i][j], elements[i][0])
-
-
-
-    print(elements)
+                elements[j][i + 1] = function.next_iter(a, d, elements[quant_el - 1][i], elements[j][i], elements[j + 1][i])
+            elif j == quant_el - 1:
+                elements[j][i + 1] = function.next_iter(a, d, elements[j - 1][i], elements[j][i], elements[0][i])
+            else:
+                elements[j][i+1] = function.next_iter(a, d, elements[j - 1][i], elements[j][i], elements[j + 1][i])
     return elements
-matrix = model_pereod()
-x1 = np.zeros(10000)
-y1 = np.zeros(10000)
-for i in range (10000):
-    x1[i] = matrix[i][2]
-    y1[i] = matrix[i][3]
-plt.plot(x1, y1, '.')
+
+for i in range(4):
+    plot(i + 1, 4, 500)
+
+plt.legend()
 plt.grid(True)
+plt.xlabel("k")
+plt.ylabel("$U_i$")
 plt.show()
+
+
+
+
+
+
+
+
 
 
 
