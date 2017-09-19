@@ -30,36 +30,38 @@ import function
 
 import matplotlib.pyplot as plt
 
-def model_cube_ring(quant_el=100, quant_iter=200, a = 0.5, d = 0.5, one_rand = 0, end_rand = 2):
+def model_cube_ring(quant_el=100, quant_iter=500, a = 0.5, d = 0.4, one_rand = 0, end_rand = 1):
     elements = np.zeros((2, quant_el)) #первая строка x, второя y. Учитываем граничные условия
     elements_time = np.zeros((2, quant_iter))  #первая строка x, второя y. Количество итераций
-    elements[0][0] = random.uniform(one_rand, end_rand) #случайные нач. условия в заданном интервале
-    elements[1][0] = random.uniform(one_rand, end_rand)
+    #случайные нач. условия в заданном интервале
+    for i in range(quant_el):
+        elements[0][i] = random.uniform(one_rand, end_rand)
+        elements[1][i] = random.uniform(one_rand, end_rand)
+
     #elements[0][0] = 1.45
     #elements[1][0] = .5
-    elements_time[0][0] = elements[0][0]
-    elements_time[1][0] = elements[1][0]
     j = 0
-    for i in range(quant_iter -1):
+    for i in range(quant_iter):
 
-        elements[0][j+1] = elements[0][j]
-        elements[1][j+1] = function.stat_iter(a, d, elements[0][j], elements[1][j])
-        if j == 0:
-            elements_time[0][i + 1] = elements[0][0]
-            elements_time[1][i + 1] = elements[1][0]
-        else:
-            elements_time[0][i+1] = elements[0][j+1]
-            elements_time[1][i+1] = elements[0][j+1]
-            j = j + 1
-        if j == quant_el - 1:
+        if j ==0:
+            elements[0][j] = function.stat_iter(a, d, elements[0][quant_el - 1], elements[1][quant_el - 1])
+            elements[1][j] = elements[0][quant_el - 1]
+        elif j == quant_el - 1:
             j = 0
-    plt.plot(elements_time[0], elements_time[1], '.')
-    plt.plot(elements[0][0], elements[1][0],'.')
+        else:
+            elements[0][j] = function.stat_iter(a, d, elements[0][j - 1], elements[1][j - 1])
+            elements[1][j] = elements[0][j - 1]
+        elements_time[0][i] = elements[0][j]
+        elements_time[1][i] = elements[1][j]
+        j = j + 1
+   # plt.plot(elements_time[0], elements_time[1], '.')
+    #plt.plot(elements[0][0], elements[1][0],'.')
+   # plt.show()
+    plt.plot(0, elements_time[1][0], 'o')
+    plt.plot(np.arange(quant_iter), elements_time[1], '.', linestyle = '-')
+    plt.ylabel('$y_{l + 1}$')
+    plt.xlabel('k - дискретное время ')
+    plt.grid(True)
     plt.show()
-    plt.plot(np.arange(quant_iter), elements_time[1], '.')
-    plt.plot(np.arange(quant_iter), elements_time[1], '--')
-    plt.plot(0, elements_time[1][0], '*')
-    plt.show()
-    print(elements_time)
 
 model_cube_ring()

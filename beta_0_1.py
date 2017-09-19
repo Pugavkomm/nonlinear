@@ -23,7 +23,6 @@ def plot(number_el, quant_el, quant_it):
     for i in range(quant_it):
         y[i] = matrix[number_el - 1][i]
     plt.plot(np.arange(quant_it), y, '.', linestyle = '-', label = "$U_" + str(number_el) + "$")
-    #plt.plot(np.arange(quant_it), y, '.')
 def model_pereod(quant_el, quant_it, d=0.4, a = 0.5, one_rand = 0, end_rand = 1):
     elements= np.zeros((quant_el, quant_it))
     #print(elements)
@@ -39,13 +38,13 @@ def model_pereod(quant_el, quant_it, d=0.4, a = 0.5, one_rand = 0, end_rand = 1)
                 elements[j][i+1] = function.next_iter(a, d, elements[j - 1][i], elements[j][i], elements[j + 1][i])
     return elements
 
-for i in range(4):
-    plot(i + 1, 4, 500)
+for i in range(10):
+    plot(i + 1, 10, 500)
 
 plt.legend()
 plt.grid(True)
-plt.xlabel("k")
-plt.ylabel("$U_i$")
+plt.xlabel("k - дискретное время")
+plt.ylabel("$U_i$ - номер элемента цепочки ")
 plt.show()
 
 
