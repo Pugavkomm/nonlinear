@@ -28,40 +28,32 @@ import numpy as np
 import random
 import function
 
-import matplotlib.pyplot as plt
 
-def model_cube_ring(quant_el=100, quant_iter=500, a = 0.5, d = 0.4, one_rand = 0, end_rand = 1):
+def model_cube_ring(quant_el=100, quant_iter=500, a = 0.5, d = 0.4, one_rand = 0, end_rand = 1, alpha = 1):
+    # функция моделирует систему, когда решение ищем в виде стац. волн, возвращает матрицу, 1 строка - x, вторая y
     elements = np.zeros((2, quant_el)) #первая строка x, второя y. Учитываем граничные условия
     elements_time = np.zeros((2, quant_iter))  #первая строка x, второя y. Количество итераций
     #случайные нач. условия в заданном интервале
     for i in range(quant_el):
-        elements[0][i] = random.uniform(one_rand, end_rand)
-        elements[1][i] = random.uniform(one_rand, end_rand)
-
+        elements[0][i] = random.uniform(0, 1)
+        elements[1][i] = random.uniform(0, 1)
+    print(elements)
     #elements[0][0] = 1.45
     #elements[1][0] = .5
     j = 0
     for i in range(quant_iter):
 
         if j ==0:
-            elements[0][j] = function.stat_iter(a, d, elements[0][quant_el - 1], elements[1][quant_el - 1])
+            elements[0][j] = function.stat_iter(a, d, elements[0][quant_el - 1], elements[1][quant_el - 1], alpha)
             elements[1][j] = elements[0][quant_el - 1]
         elif j == quant_el - 1:
             j = 0
         else:
-            elements[0][j] = function.stat_iter(a, d, elements[0][j - 1], elements[1][j - 1])
+            elements[0][j] = function.stat_iter(a, d, elements[0][j - 1], elements[1][j - 1], alpha)
             elements[1][j] = elements[0][j - 1]
         elements_time[0][i] = elements[0][j]
         elements_time[1][i] = elements[1][j]
         j = j + 1
-   # plt.plot(elements_time[0], elements_time[1], '.')
-    #plt.plot(elements[0][0], elements[1][0],'.')
-   # plt.show()
-    plt.plot(0, elements_time[1][0], 'o')
-    plt.plot(np.arange(quant_iter), elements_time[1], '.', linestyle = '-')
-    plt.ylabel('$y_{l + 1}$')
-    plt.xlabel('k - дискретное время ')
-    plt.grid(True)
-    plt.show()
 
-model_cube_ring()
+    return elements_time
+
