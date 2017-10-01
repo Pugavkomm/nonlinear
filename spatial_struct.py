@@ -1,14 +1,17 @@
-import matplotlib
+import time
+import progress_bar
 import matplotlib.pyplot as plt
-import matplotlib.cm
 import numpy as np
 import function_start_ring
-
-quant_it = 400   # количество итераций
+start_time = time.time()
+quant_it = 300   # количество итераций
 quant_el = 100   # количество элементов
-
-matrix = function_start_ring.model_pereod(quant_el, quant_it, a = 0.05, d = .4, alpha= 1) # вызываем функцию, которая возвращает матрицу с реализацией системы
+a = .2
+d = .4
+alpha = 1
+matrix = function_start_ring.model_pereod(quant_el, quant_it, a = a, d = d, alpha= alpha, start = 2) # вызываем функцию, которая возвращает матрицу с реализацией системы
 for i in range(quant_el):
+    progress_bar.update_progress(i / quant_el, 'построение графика')
     plt.scatter(np.arange(quant_it), i*np.ones(quant_it), 4,  c =matrix[i], alpha=0.6)  # строим график, где цветом отображаем амплитуду
 cb = plt.colorbar()
 print(min, max)
@@ -16,9 +19,9 @@ print(np.linspace(np.min(matrix), np.max(matrix), 3))
 cb.set_label('значение элемента')
 #cb.set_ticklabels('one')
 
-plt.xlabel('k - дискретное время')
-plt.ylabel('$U_i$ - номер элемента')
-
-
+plt.xlabel('n - дискретное время')
+plt.ylabel('$U_j$ - номер элемента')
+plt.title('d = ' + str(d) + ', a = ' + str(a) + r', $\alpha$ = ' + str(alpha))
+print('time: %f', time.time() - start_time,' second')
 plt.show()
 

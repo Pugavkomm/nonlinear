@@ -1,13 +1,12 @@
-# строим реализацию изначальной системы
-import function_start_ring
+import segment_function
 import matplotlib.pyplot as plt
 import numpy
 
-quant_it = 500
-quant_el = 100
-
+quant_it = 900
+quant_el = 200
+quant_start = 50
 aa = 0.2
-matrix = function_start_ring.model_pereod(quant_el, quant_it, alpha= 1, d = 0.4, a = aa, one_rand = 0, end_rand = 1, start=2)
+matrix = segment_function.segmen(quant_el, quant_it,quant_start, alpha= 1, d = 0.4, a = aa)
 x = numpy.arange(quant_it)
 for i in range(quant_el):
     plt.plot(x, matrix[i], '.', linestyle = '-' )

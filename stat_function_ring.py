@@ -29,7 +29,7 @@ import random
 import function
 
 
-def model_cube_ring(quant_el=100, quant_iter=500, a = 0.5, d = 0.4, one_rand = 0, end_rand = 1, alpha = 1):
+def model_cube_ring(quant_el=100, quant_iter=500, a = 0.5, d = 0.4, one_rand = .1, end_rand = .2, alpha = 1):
     # функция моделирует систему, когда решение ищем в виде стац. волн, возвращает матрицу, 1 строка - x, вторая y
     elements = np.zeros((2, quant_el)) #первая строка x, второя y. Учитываем граничные условия
     elements_time = np.zeros((2, quant_iter))  #первая строка x, второя y. Количество итераций

@@ -28,13 +28,13 @@ elif y == 1:
     plt.title('$O_2(x = y = 1$')
 else:
     plt.title('$O_3(x = y = a)$')
-for i in range(9):
+for i in range(1):
     for j in range(len(iteration)):
         y = iteration[j]
-        mem_save_plus[j] = mu('+', iteration[j], 0.1 + i / 10, y)
-        mem_save_minus[j] = mu('-', iteration[j], 0.1 + i / 10, y)
-    plt.plot(iteration, mem_save_plus, label="$\mu_+$, d = " + str(round(0.1 + i / 10, 2)), color = 'black')
-    plt.plot(iteration, mem_save_minus, label="$\mu_-$, d = " + str(round(0.1 + i / 10, 2)), color='red')
+        mem_save_plus[j] = mu('+', iteration[j], 0.4 + i / 10, 1)
+        mem_save_minus[j] = mu('-', iteration[j], 0.4 + i / 10, 1)
+    plt.plot(iteration, mem_save_plus, label="$\mu_+$, d = " + str(round(0.4 + i / 10, 2)), color = 'black')
+    plt.plot(iteration, mem_save_minus, label="$\mu_-$, d = " + str(round(0.4 + i / 10, 2)), color='red')
     plt.plot([-10, 10], [1, 1], color = 'green')
     plt.plot([-10,10], [-1, -1], color = 'green')
     plt.xlabel('a')
