@@ -16,7 +16,7 @@ for i in range(quant_el):
 cb = plt.colorbar()
 print(min, max)
 print(np.linspace(np.min(matrix), np.max(matrix), 3))
-cb.set_label('значение элемента')
+cb.set_label('значение элемента' )
 #cb.set_ticklabels('one')
 plt.xlim([0, quant_it - 500])
 plt.xlabel('n - дискретное время')
