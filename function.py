@@ -24,4 +24,4 @@ def next_iter(a, d, early, present, next, alpha = 1):
 # функция для системы записанной в новых переменных, дл решения в виде стационарных волн
 
 def stat_iter(a, d, x, y, alpha = 1):
-    return d/(1-d)*x + ((1-2*d)*y + nonlin_func(a, y, alpha))/(1 - d)
+    return (d*x + (1-2*d)*y + nonlin_func(a, y, alpha))/(1 - d)
