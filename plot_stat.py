@@ -1,9 +1,14 @@
 import stat_function_ring
 import numpy as np
 import matplotlib.pyplot as plt
+s_a = .3
+s_d = .5
+s_alpha = .005
+s_quant_el, s_quant_it = 100, 1000
+s_one_rand, s_end_rand = .3, .34
 
-def plot_stat(quant_el = 100, quant_it = 500, d = .5, a = 0.3, alpha = .05):
-    matrix = stat_function_ring.model_cube_ring(quant_el, quant_it, a, d, alpha)
+def plot_stat(quant_el, quant_it, a, d,  one_rand, end_rand, alpha):
+    matrix = stat_function_ring.model_cube_ring(quant_el, quant_it, a, d,one_rand, end_rand,  alpha)
     print(matrix)
     x = np.zeros(quant_it)
     y =  np.zeros(quant_it)
@@ -24,6 +29,7 @@ def plot_stat(quant_el = 100, quant_it = 500, d = .5, a = 0.3, alpha = .05):
     f = open('mass.txt', 'wb')
     np.savetxt(f, matrix)
     f.close()
-plot_stat(quant_el= 100, quant_it= 50000)
+
+plot_stat(s_quant_el, s_quant_it, s_a, s_d, s_alpha, s_one_rand, s_end_rand)
 
 

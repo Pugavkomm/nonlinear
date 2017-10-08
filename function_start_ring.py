@@ -44,21 +44,3 @@ def model_pereod(quant_el, quant_it, d=0.4, a = 0.2, one_rand = 0.3, end_rand = 
                 elements[j][i+1] = function.next_iter(a, d, elements[j - 1][i], elements[j][i], elements[j + 1][i], alpha)
     print('1')
     return elements
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

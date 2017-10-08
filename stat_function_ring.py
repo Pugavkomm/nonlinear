@@ -29,13 +29,13 @@ import random
 import function
 
 
-def model_cube_ring(quant_el=100, quant_iter=500, a = 0.3, d = 0.5, one_rand = .1, end_rand = .9, alpha = .005):
+def model_cube_ring(quant_el, quant_iter, a, d, one_rand, end_rand, alpha):
     # функция моделирует систему, когда решение ищем в виде стац. волн, возвращает матрицу, 1 строка - x, вторая y
     elements = np.zeros((2, quant_el)) #первая строка x, второя y. Учитываем граничные условия
     elements_time = np.zeros((2, quant_iter))  #первая строка x, второя y. Количество итераций
     #случайные нач. условия в заданном интервале
-    elements[0][0] = random.uniform(.1, .4)
-    elements[1][0] = random.uniform(.1, .4)
+    elements[0][0] = random.uniform(one_rand, end_rand)
+    elements[1][0] = random.uniform(one_rand, end_rand)
     #elements[0][0] = .386
     #elements[1][0] = .351
     print(elements)

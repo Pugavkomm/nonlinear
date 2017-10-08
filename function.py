@@ -25,3 +25,9 @@ def next_iter(a, d, early, present, next, alpha = 1):
 
 def stat_iter(a, d, x, y, alpha = 1):
     return (d*x + (1-2*d)*y + nonlin_func(a, y, alpha))/(1 - d)
+
+#статическое решение
+
+def static_iter(a, d, x, y, alpha = 1):
+    print(2*y - alpha/d*nonlin_func(a, y, alpha) - x)
+    return 2*y - alpha*nonlin_func(a, y, alpha)/d - x
