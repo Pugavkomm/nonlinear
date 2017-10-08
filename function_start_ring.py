@@ -31,8 +31,9 @@ def model_pereod(quant_el, quant_it, d=0.4, a = 0.2, one_rand = 0.3, end_rand = 
     elif start == 2:
         f = open('mass.txt')
         matr = np.loadtxt(f)
-        for i in range(100,quant_el + 100):
-            elements[i - 100][0 ] = matr[0][i]
+        for i in range(200,quant_el + 200):
+            print(i)
+            elements[i - 200][0 ] = matr[0][i]
     elif start == 3:
         f = open('mass_static.txt')
         matr = np.loadtxt(f)

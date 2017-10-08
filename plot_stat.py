@@ -1,11 +1,13 @@
 import stat_function_ring
 import numpy as np
 import matplotlib.pyplot as plt
+s_quant_el, s_quant_it = 100, 100000
+
 s_a = .3
 s_d = .5
 s_alpha = .0005
-s_quant_el, s_quant_it = 100, 1000
-s_one_rand, s_end_rand = .3, .34
+
+s_one_rand, s_end_rand = .3, .5
 
 
 #s_a = .3
