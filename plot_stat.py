@@ -3,10 +3,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 s_a = .3
 s_d = .5
-s_alpha = .005
+s_alpha = .0005
 s_quant_el, s_quant_it = 100, 1000
 s_one_rand, s_end_rand = .3, .34
 
+
+#s_a = .3
+#s_d = .5
+#s_alpha = .005
+#s_quant_el, s_quant_it = 100, 1000
+#s_one_rand, s_end_rand = .3, .34
 def plot_stat(quant_el, quant_it, a, d,  one_rand, end_rand, alpha):
     matrix = stat_function_ring.model_cube_ring(quant_el, quant_it, a, d,one_rand, end_rand,  alpha)
     print(matrix)

@@ -29,5 +29,5 @@ def stat_iter(a, d, x, y, alpha = 1):
 #статическое решение
 
 def static_iter(a, d, x, y, alpha = 1):
-    print(2*y - alpha/d*nonlin_func(a, y, alpha) - x)
+    #print(2*y - alpha/d*nonlin_func(a, y, alpha) - x)
     return 2*y - alpha*nonlin_func(a, y, alpha)/d - x
