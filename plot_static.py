@@ -6,8 +6,8 @@ import statick
 s_a = .5
 s_d = .001
 s_alpha = .12
-s_quant_el, s_quant_it = 100, 100000
-s_one_rand, s_end_rand = .3, .5
+s_quant_el, s_quant_it = 100, 1000
+s_one_rand, s_end_rand = .3, .4
 
 # сохраним реализацию системы в переменной matrix
 

@@ -31,14 +31,14 @@ def model_pereod(quant_el, quant_it, d=0.4, a = 0.2, one_rand = 0.3, end_rand = 
     elif start == 2:
         f = open('mass.txt')
         matr = np.loadtxt(f)
-        for i in range(200,quant_el + 200):
+        for i in range(100000,quant_el + 100000):
             print(i)
-            elements[i - 200][0 ] = matr[0][i]
+            elements[i - 100000][0 ] = matr[1][i]
     elif start == 3:
         f = open('mass_static.txt')
         matr = np.loadtxt(f)
-        for i in range(100, quant_el + 100):
-            elements[i - 100][0] = matr[1][i]
+        for i in range(100000, quant_el + 100000):
+            elements[i - 100000][0] = matr[1][i]
     for i in range(quant_it - 1):
         progress_bar.update_progress(i/(quant_it - 1), 'вычисление системы')
         for j in range(quant_el):

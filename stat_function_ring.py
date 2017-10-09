@@ -29,36 +29,29 @@ import random
 import function
 
 
-def model_cube_ring(quant_el, quant_iter, a, d, one_rand, end_rand, alpha):
-    quant_el = quant_el + 1
+def model_cube_ring(quant_el, quant_it, a, d, one_rand, end_rand, alpha):
+    #quant_el = quant_el + 1
     # функция моделирует систему, когда решение ищем в виде стац. волн, возвращает матрицу, 1 строка - x, вторая y
-    elements = np.zeros((2, quant_el)) #первая строка x, второя y. Учитываем граничные условия
-    elements_time = np.zeros((2, quant_iter))  #первая строка x, второя y. Количество итераций
+    elements_time = np.zeros((2, quant_it))  #первая строка x, второя y. Количество итераций
     #случайные нач. условия в заданном интервале
-    elements[0][0] = random.uniform(one_rand, end_rand)
-    elements[1][0] = random.uniform(one_rand, end_rand)
+    elements_time[0][0  ] = random.uniform(one_rand, end_rand)
+    elements_time[1][0] = random.uniform(one_rand, end_rand)
     #elements[0][0] = .386
     #elements[1][0] = .351
-    print(elements)
     #elements[0][0] = 1.45
     #elements[1][0] = .5
     j = 1
-    for i in range(quant_iter):
-        if j ==0:
-            elements[1][j] = function.stat_iter(a, d, elements[0][quant_el - 1], elements[1][quant_el - 1], alpha)
-            elements[0][j] = elements[1][quant_el - 1]
-
-        elif (j == quant_el - 1):
-            elements[0][j] = elements[1][j - 1]
-            elements[1][j] = elements[1][0]
-        else:
-            elements[1][j] = function.stat_iter(a, d, elements[0][j - 1], elements[1][j - 1], alpha)
-            elements[0][j] = elements[1][j - 1]
-        elements_time[0][i] = elements[0][j]
-        elements_time[1][i] = elements[1][j]
-        j = j + 1
-        if j == quant_el:
+    k = 0
+    for i in range(1, quant_it):
+        if j == quant_el :
+            print(i)
             j = 0
-
+            k = k + 1
+            elements_time[0][i] = elements_time[1][i - 1]
+            elements_time[1][i] = elements_time[1][i - quant_el]
+        else:
+            elements_time[0][i] = elements_time[1][i - 1]
+            elements_time[1][i] = function.stat_iter (a, d, elements_time[0][i - 1], elements_time[1][i - 1], alpha)
+        j = j + 1
     return elements_time
 

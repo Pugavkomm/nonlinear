@@ -1,13 +1,13 @@
 import stat_function_ring
 import numpy as np
 import matplotlib.pyplot as plt
-s_quant_el, s_quant_it = 100, 100000
+s_quant_el, s_quant_it = 200, 460000
 
 s_a = .3
 s_d = .5
-s_alpha = .0005
+s_alpha = .15
 
-s_one_rand, s_end_rand = .3, .5
+s_one_rand, s_end_rand = .02, .4
 
 
 #s_a = .3
@@ -23,21 +23,22 @@ def plot_stat(quant_el, quant_it, a, d,  one_rand, end_rand, alpha):
     for i in range(quant_it):
         x[i] = matrix[0][i]
         y[i] = matrix[1][i]
-    plt.plot(np.arange(quant_it), x, '.', linestyle = '-')
+    plt.plot(np.arange(quant_it), y, '.', linestyle = '-')
     plt.xlabel('n - дискретное время')
+    plt.xlim([400000, quant_it])
     plt.ylabel('$x_k$')
     plt.title('$u_j(n) = \psi(j+n)$' + ' \n d = ' + str(d) + ', a = ' + str(a) + r' $, \alpha = $' + str(alpha) + '\n нач. усл. x = ' + str(x[0]) + ', y = ' + str(y[0]) )
     plt.show()
-    plt.plot(x, y, '.', linestyle = '-')
+    #plt.plot(x, y, '.', linestyle = '-')
     plt.xlabel('x')
     plt.ylabel('y')
 
 
-    plt.show()
+    #plt.show()
     f = open('mass.txt', 'wb')
     np.savetxt(f, matrix)
     f.close()
 
-plot_stat(s_quant_el, s_quant_it, s_a, s_d, s_alpha, s_one_rand, s_end_rand)
+plot_stat(s_quant_el, s_quant_it, s_a, s_d, s_one_rand, s_end_rand, s_alpha)
 
 

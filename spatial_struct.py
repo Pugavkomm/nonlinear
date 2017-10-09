@@ -3,10 +3,10 @@ import numpy as np
 import function_start_ring
 s_a = .3
 s_d = .5
-s_alpha = .0005
+s_alpha = .15
 
 quant_it = 1000  # количество итераций
-quant_el = 100  # количество элементов
+quant_el = 200  # количество элементов
 
 matrix = function_start_ring.model_pereod(quant_el, quant_it, a = s_a, d = s_d, alpha= s_alpha, start = 2) # вызываем функцию, которая возвращает матрицу с реализацией системы
 for i in range(quant_el):
