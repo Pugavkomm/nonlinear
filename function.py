@@ -31,3 +31,7 @@ def stat_iter(a, d, x, y, alpha = 1):
 def static_iter(a, d, x, y, alpha = 1):
     #print(2*y - alpha/d*nonlin_func(a, y, alpha) - x)
     return 2*y - alpha*nonlin_func(a, y, alpha)/d - x
+
+
+def two_c_stat_solve_piecewise(d, alpha,beta, x_four, x_three, x_one, c = 2):
+    return (x_four - (1 - 2*d)*x_three - x_one - alpha*piecewise_line(x_three, beta, alpha))/d
