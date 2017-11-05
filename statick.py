@@ -16,14 +16,15 @@ def static(quant_el, quant_it, a, d, alpha, one_rand, end_rand):
     j = 1
     k = 0
     for i in range (1, quant_it):
-        if j == quant_el - 1:
+        if j == quant_el:
+            print (i)
             j = 0
             k = k + 1
             elements_time[0][i] = elements_time[1][i - 1]
-            elements_time[1][i] = elements_time[1][i -  quant_el]
+            elements_time[1][i] = elements_time[1][i - quant_el]
         else:
             elements_time[0][i] = elements_time[1][i - 1]
-            elements_time[1][i] = function.stat_iter (a, d, elements_time[0][i - 1], elements_time[1][i - 1], alpha)
-    print(elements_time[0][100], elements_time[0][200])
+            elements_time[1][i] = function.static_iter (a, d, elements_time[0][i - 1], elements_time[1][i - 1], alpha)
+        j = j + 1
     return elements_time
 

@@ -33,11 +33,11 @@ def model_pereod(quant_el, quant_it, d=0.4, a = 0.2, one_rand = 0.3, end_rand = 
         matr = np.loadtxt(f)
         for i in range(100000,quant_el + 100000):
             print(i)
-            elements[i - 100000][0 ] = matr[1][i]
+            elements[i - 100000][0] = matr[1][i]
     elif start == 3:
         f = open('mass_static.txt')
         matr = np.loadtxt(f)
-        for i in range(100000, quant_el + 100000):
+        for i in range(100000, quant_el + 1000):
             elements[i - 100000][0] = matr[1][i]
     for i in range(quant_it - 1):
         progress_bar.update_progress(i/(quant_it - 1), 'вычисление системы')
