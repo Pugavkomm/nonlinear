@@ -7,7 +7,7 @@ import function as f
 #создаем функцию, которая будет давать реализацию программы в
 #виде матрицы, при этом зададим в ней различные граничные усл
 
-def realize_f_s_p(quant_it, quant_el, d = 0.1, alpha = .2, beta = .1, bound = 'ring', c = 2):
+def realize_f_s_p(quant_it, quant_el, d = 0.1, alpha = .2, beta = .1я, bound = 'ring', c = 2):
     elements = np.zeros((2*c, quant_it))
 
     for i in range(1, quant_it):

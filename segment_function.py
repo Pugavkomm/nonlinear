@@ -3,18 +3,18 @@ import function
 import progress_bar
 #зададим систему, но граничные условия будут давать отрезок
 
-def segmen(quant_el = 100, quant_it = 110, quant_start_one= 10, quant_start_end = 50,value_start= .2, d=0.4, a = 0.5, alpha = 1):
+def segmen(quant_el = 100, quant_it = 110, quant_start_one= 10, quant_start_end = 50,value_start= .2, d=0.4, a = 0.5, alpha = 1, beta = 0, nonlin = 'cubee'):
     elements = np.zeros((quant_el, quant_it))
     #for i in range(quant_start_one, quant_start_end + 1):
        #elements[i][0] = value_start
-    elements[0][0]= 1
+    elements[0][0] = 1 + beta/2/alpha
     for i in range(quant_it - 1):
         progress_bar.update_progress(i / (quant_it - 1), 'вычисление системы')
         for j in range(quant_el):
             if j == 0:
-                elements[j][i + 1] = function.next_iter(a, d, 0, elements[j][i], elements[j + 1][i], alpha)
+                elements[j][i + 1] = function.next_iter(a, d, 0, elements[j][i], elements[j + 1][i], alpha, beta, nonlin)
             elif j == quant_el - 1:
-                elements[j][i + 1] = function.next_iter(a, d, elements[j - 1][i], elements[j][i], 0, alpha)
+                elements[j][i + 1] = function.next_iter(a, d, elements[j - 1][i], elements[j][i], 0, alpha, beta, nonlin)
             else:
-                elements[j][i + 1] = function.next_iter(a, d, elements[j - 1][i], elements[j][i], elements[j + 1][i], alpha)
+                elements[j][i + 1] = function.next_iter(a, d, elements[j - 1][i], elements[j][i], elements[j + 1][i], alpha, beta, nonlin)
     return elements

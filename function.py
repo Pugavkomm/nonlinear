@@ -18,8 +18,11 @@ def nonlin_func(a, u, alpha = 1):
 # создадим функцию задающю отображение
 # необходимые действия связанные с номером элемента проведем уже в основной части программы
 
-def next_iter(a, d, early, present, next, alpha = 1):
-    return present + d*(next - 2*present + early) + nonlin_func(a, present, alpha)
+def next_iter(a, d, early, present, next, alpha = 1,beta = 0, nonlin = 'cube'):
+    if nonlin == 'cube':
+        return present + d*(next - 2*present + early) + nonlin_func(a, present, alpha)
+    if nonlin == 'piece':
+        return present + d * (next - 2 * present + early) + piecewise_line(present, beta, alpha)
 
 # функция для системы записанной в новых переменных, дл решения в виде стационарных волн
 

@@ -34,8 +34,8 @@ def model_cube_ring(quant_el, quant_it, a, d, one_rand, end_rand, alpha):
     # функция моделирует систему, когда решение ищем в виде стац. волн, возвращает матрицу, 1 строка - x, вторая y
     elements_time = np.zeros((2, quant_it))  #первая строка x, второя y. Количество итераций
     #случайные нач. условия в заданном интервале
-    elements_time[0][0] = .301 #random.uniform(one_rand, end_rand)
-    elements_time[1][0] = .3002 #random.uniform(one_rand, end_rand)
+    elements_time[0][0] = .117 #random.uniform(one_rand, end_rand)
+    elements_time[1][0] = .1338 #random.uniform(one_rand, end_rand)
     #elements[0][0] = .386
     #elements[1][0] = .351
     #elements[0][0] = 1.45

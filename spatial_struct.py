@@ -1,15 +1,15 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import function_start_ring
-s_a = .6
-s_d = .3
+s_a = .3
+s_d = .5
 s_alpha = .1
 s_quant_it = 2000
 
-quant_it = 2000 # количество итераций
+quant_it = 300  # количество итераций
 quant_el = 200  # количество элементов
 
-matrix = function_start_ring.model_pereod(quant_el, quant_it, a = s_a, d = s_d, alpha= s_alpha, start = 1) # вызываем функцию, которая возвращает матрицу с реализацией системы
+matrix = function_start_ring.model_pereod(quant_el, quant_it, a = s_a, d = s_d, alpha= s_alpha, start = 2) # вызываем функцию, которая возвращает матрицу с реализацией системы
 f = open('mass.txt')
 matr = np.loadtxt(f)
 f.close()
@@ -22,10 +22,11 @@ for i in range(len(matr[0])):
 for i in range(quant_el):
     plt.scatter(np.arange(quant_it), i*np.ones(quant_it), 4,  c =matrix[i], alpha=0.6)  # строим график, где цветом отображаем амплитуду
 cb = plt.colorbar()
+
 print(min, max)
 print(np.linspace(np.min(matrix), np.max(matrix), 3))
 cb.set_label('значение элемента')
-plt.xlim(0, quant_it - 700)
+plt.xlim(0, 250)
 #cb.set_ticklabels('one')
 
 plt.xlabel('k - дискретное время')
