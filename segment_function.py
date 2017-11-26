@@ -1,15 +1,15 @@
 import numpy as np
 import function
 import progress_bar
-
+import random
 
 # зададим систему, но граничные условия будут давать отрезок
 
 def segment(quant_el=100, quant_it=110, quant_start_one=10, quant_start_end=50, value_start=.2, d=0.4, a=0.5, alpha=1,
             beta=0, nonlinear='cube'):
     elements = np.zeros ((quant_el, quant_it))
-    # for i in range(quant_start_one, quant_start_end + 1):
-    # elements[i][0] = value_start
+    #for i in range(quant_start_one, quant_start_end + 1):
+     #   elements[i][0] = random.uniform(0,1)
     elements[49][0] = 1 + beta / 2 / alpha
     for i in range (quant_it - 1):
         progress_bar.update_progress (i / (quant_it - 1), 'вычисление системы')

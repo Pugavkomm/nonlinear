@@ -3,32 +3,33 @@ import numpy as np
 import segment_function
 import time
 import progress_bar
-
+import matplotlib.cm as cm
 start_time = time.time ()
-quant_it = 1000  # количество итераций
-quant_el = 100  # количество элементов
-quant_start_one = 40  # c этого элемента задаем начальные условия
-quant_start_end = 60  # на этом элементе заканчиваем задавать н.у. остальные элементы равны нулю
-value_start = .5  # значение начальных условий
-alpha = .9
-beta = 0
-d = .09
+quant_it = 400  # количество итераций
+quant_el = 101  # количество элементов
+quant_start_one =20  # c этого элемента задаем начальные условия
+quant_start_end = 80  # на этом элементе заканчиваем задавать н.у. остальные элементы равны нулю
+value_start = 1.5  # значение начальных условий
+alpha = .6
+beta = 0.0
+d = .3
 a = aa = .2
-nonlinear = 'cube'
-# nonlin = 'piece'
+#nonlinear = 'cube'
+nonlinear = 'piece'
 matrix = segment_function.segment (quant_el, quant_it, quant_start_one, quant_start_end, value_start, a=a, d=d,
                                    alpha=alpha, beta=beta,
                                    nonlinear=nonlinear)  # вызываем функцию, которая возвращает матрицу с реализацией
 # системыc
-plt.figure ()
-plt.subplot (2, 1, 1)
+
 maxim = matrix.max ()
 minim = matrix.min ()
 
+plt.figure ()
+plt.subplot (2, 1, 1)
 for i in range (quant_el):
     # color = [str (item / 255.) for item in matrix[i]]
     progress_bar.update_progress (i / quant_el, 'построение графика')
-    plt.scatter (np.arange (quant_it), i * np.ones (quant_it), s=10, c=matrix[i], vmin=minim,
+    plt.scatter (np.arange (quant_it), i * np.ones (quant_it), cmap = cm.jet, s=10, c=matrix[i], vmin=minim,
                  vmax=maxim)  # строим график, где цветом отображаем амплитуду
 
 cb = plt.colorbar ()
@@ -69,20 +70,22 @@ plt.ylabel ('$U_j$ значение элемента')
 print (matrix)
 plt.grid (True, color='black', alpha=.4, linestyle='--')
 plt.show ()
-
+plt.savefig('chaotic.png')
+'''
 for i in range (len (matrix[0])):
-    if matrix[19][i] > 0:
+    if matrix[80][i] > 0:
         t1 = i
         break
 for i in range (len (matrix[0])):
-    if matrix[99][i] > 0:
+    if matrix[60][i] > 0:
         t2 = i
         break
 # print(s1, s2)
 # print(t1)
 # print(t2)
-
-c = abs (80 / (t2 - t1))
+t1 = 1
+t2 = 2
+c = abs (20 / (t2 - t1))
 f = open ('spatial_segment_info.txt', 'w')
 info = 'd = ' + str (d) + ', alpha = ' + str (alpha) + ', beta = ' + str (beta) + 'н.у.' + str (
     matrix[0][0]) + ', c = ' + str (c)
@@ -91,3 +94,15 @@ f.write (info)
 f.close ()
 
 print (matrix[20])
+
+
+for i in range (quant_el):
+    # color = [str (item / 255.) for item in matrix[i]]
+    progress_bar.update_progress (i / quant_el, 'построение графика')
+    plt.scatter (np.arange (quant_it), i * np.ones (quant_it), s=10, c=matrix[i], vmin=minim,
+                 vmax=maxim)  # строим график, где цветом отображаем амплитуду
+plt.axis('off')
+plt.xlim([0, quant_it - 30])
+plt.ylim([0,quant_el - 1])
+plt.show()
+'''
