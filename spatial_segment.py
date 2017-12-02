@@ -6,8 +6,8 @@ import progress_bar
 import matplotlib.cm as cm
 from func_for_mult_spectr import mutipl_all
 start_time = time.time ()
-quant_it = 15000  # количество итераций
-quant_el = 50  # количество элементов
+quant_it = 200 # количество итераций
+quant_el = 100  # количество элементов
 quant_start_one =0 # c этого элемента задаем начальные условия
 quant_start_end = quant_el # на этом элементе заканчиваем задавать н.у. остальные элементы равны нулю
 value_start = 1.5  # значение начальных условий
@@ -16,9 +16,11 @@ beta = .0
 d = .20014
 a = aa = .2
 f = mutipl_all(quant_el, alpha)
+info = ''
 for j in range(1):
-    for i in range(len(f) - 1):
+    for i in range(47,48):
         d = (f[i + 1] + f[i])/2
+
         #print('\n', 'alpha = ', alpha, ', d = ', d, ', beta = ', beta)
         print('\n', 'd = ', d,', alpha = ', alpha,  ', beta = ', beta)
 
@@ -33,11 +35,11 @@ for j in range(1):
         minim = matrix.min ()
 
         plt.figure (figsize=(8, 6))
-        plt.subplot (2, 1, 1)
-        for i in range (quant_el):
+        ax = plt.subplot (2, 1, 1)
+        for t in range (quant_el):
             # color = [str (item / 255.) for item in matrix[i]]
-            progress_bar.update_progress (i / quant_el, 'построение графика')
-            plt.scatter (np.arange (quant_it), i * np.ones (quant_it), cmap = cm.jet, s=1, c=matrix[i], vmin=minim,
+            progress_bar.update_progress (t / quant_el, 'построение графика')
+            plt.scatter (np.arange (quant_it), t * np.ones (quant_it), cmap = cm.jet, s=1, c=matrix[t], vmin=minim,
                          vmax=maxim)  # строим график, где цветом отображаем амплитуду
 
         cb = plt.colorbar ()
@@ -59,6 +61,20 @@ for j in range(1):
                 d) + r', $\beta = $' + str (beta))
         plt.xlim([0, quant_it])
         plt.ylim ([0, quant_el - 1])
+        xmajor_ticks = np.arange(0, quant_it - 1, 10)
+        xminor_ticks = np.arange(0, quant_it - 1, 5)
+        ymajor_ticks = np.arange(0, quant_el - 1, 10)
+        yminor_ticks = np.arange(0, quant_el - 1, 2)
+        ax.set_xticks(xmajor_ticks)
+        ax.set_xticks(xminor_ticks, minor = True)
+        ax.set_yticks(ymajor_ticks)
+        ax.set_yticks(yminor_ticks, minor = True)
+        ax.grid(which='both')
+
+        # or if you want differnet settings for the grids:
+        ax.grid(which='minor', alpha=1)
+        ax.grid(which='major', alpha=1)
+        plt.grid(True, color = 'black')
         fig = plt.subplot (2, 1, 2)
 
         # fig.patch.set_facecolor('w')
@@ -66,8 +82,8 @@ for j in range(1):
         # Изменение параметров рисования (смена чёрного по белому на белое по чёрному)
 
         x = np.arange (quant_it)
-        for i in range (1, quant_el):
-            plt.plot (x, matrix[i], '.', linestyle='-')
+        for t in range (1, quant_el):
+            plt.plot (x, matrix[t], '.', linestyle='-')
         # plt.plot([0, quant_it], [0, 0], linestyle = '-', c = 'black', label = 'н.т.: u = 0')
         # plt.plot([0, quant_it], [1, 1], linestyle = '-', c = 'blue', label = 'н.т.: u =  1')
         # plt.plot([0, quant_it], [aa, aa], linestyle = '-', c = 'red', label = 'н.т.: u = a = ' + str(aa))
@@ -76,11 +92,27 @@ for j in range(1):
         plt.xlabel ('n - дискретное время')
         plt.ylabel ('$U_j$ значение элемента')
         plt.grid (True, color='black', alpha=.4, linestyle='--')
-        #plt.show ()
+            plt.show ()
         plt.xlim([0, quant_it])
-        plt.savefig('_ d = ' + str(d) + r'alpha = ' + str(alpha) + r'beta = ' + str(beta) + '.png')
+        plt.savefig('/home/mechislav/image/var_ ' + '_ d = ' + str(d) + r'alpha = ' + str(alpha) + r'beta = ' + str(beta) + '.png')
         plt.close()
 
         alpha = round(alpha, 3)
+        n = 0
+        n1 = 0
+        for k in range(quant_it):
+            if matrix[50][k] > 0.75:
+                n1 = k
+            if matrix[79][k] > 0.75:
+                n = k
+        if n != 0 and n1 != 0 and n != n1 :
+            c = abs((79 - 50)/(n1 - n))
+        else:
+            c = 0
+        info += 'mult out: ' +  str(i) + ': c = ' + str(c) + '\n'
+        print('mult out: ' +  str(i) + ': c = ' + str(c))
+g = open('/home/mechislav/image/info', 'w')
+g.write(info)
+g.close()
 print('\n')
 print ('time: %f', time.time () - start_time, ' second')

@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-N =50
+N =100
 alpha = .6
 d = .4
 y = np.zeros(N)
