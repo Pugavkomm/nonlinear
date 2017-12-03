@@ -7,8 +7,8 @@ from four_solve_stat_piecewise import realize_f_s_p
 
 eps = .001
 #   зададим параметры
-alpha = .9
-d = .6
+alpha = .6
+d = .25
 beta = 1
 #   зададим н.т
 

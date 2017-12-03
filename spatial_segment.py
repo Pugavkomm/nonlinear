@@ -7,8 +7,8 @@ import matplotlib.cm as cm
 from func_for_mult_spectr import mutipl_all
 
 start_time = time.time()
-quant_it = 3000  # количество итераций
-quant_el = 100  # количество элементов
+quant_it = 600 # количество итераций
+quant_el = 300  # количество элементов
 quant_start_one = 0  # c этого элемента задаем начальные условия
 quant_start_end = quant_el  # на этом элементе заканчиваем задавать н.у. остальные элементы равны нулю
 value_start = 1.5  # значение начальных условий
@@ -19,10 +19,11 @@ a = aa = .2
 f = mutipl_all(quant_el, alpha)
 info = ''
 speed = np.zeros(45)
+f_plot = np.zeros(45)
 for j in range(1):
-    for i in range(0, 44):
+    for i in range(43, 44):
         d = (f[i + 1] + f[i]) / 2
-
+        f_plot[i] = d
         # print('\n', 'alpha = ', alpha, ', d = ', d, ', beta = ', beta)
         print('\n', 'd = ', d, ', alpha = ', alpha, ', beta = ', beta)
 
@@ -35,7 +36,7 @@ for j in range(1):
 
         maxim = matrix.max()
         minim = matrix.min()
-        '''
+
         plt.figure(figsize=(8, 6))
         ax = plt.subplot(2, 1, 1)
         for t in range(quant_el):
@@ -93,38 +94,30 @@ for j in range(1):
         plt.xlabel('n - дискретное время')
         plt.ylabel('$U_j$ значение элемента')
         # plt.grid (True, color='black', alpha=.4, linestyle='--')
-        #plt.show ()
+        plt.show ()
         plt.xlim([0, quant_it])
-        plt.savefig('/home/mechislab/image/var_ ' + '_ d = ' + str(d) + r'alpha = ' + str(alpha) + r'beta = ' + str(
+        plt.savefig('/home/mechislav/image/var_ ' + '_ d = ' + str(d) + r'alpha = ' + str(alpha) + r'beta = ' + str(
             beta) + '.png')
-        plt.close()'''
+        plt.close()
         alpha = round(alpha, 3)
         n = 0
         n1 = 0
         for k in range(quant_it):
-            if matrix[20][k] > .5:
+            if matrix[30][k] > .5:
                 print('yes ', n1)
                 n1 = k
                 break
             if matrix[48][k] != 0:
                 n = k
         if n1 != 0 and n != n1:
-            c = abs((29) / (n1))
+            c = abs((19) / (n1))
         else:
             c = 0
         speed[i] = c
 
-        info += 'd = ' + str(d) + 'mult out: ' + str(i + 1) + ': c = ' + str(c) + '\n'
-        print('mult out: ' + str(i) + ': c = ' + str(c))
-g = open('/home/mechislab/image/info', 'w')
-g.write(info)
-g.close()
-print('\n')
-print('time: %f', time.time() - start_time, ' second')
+        #info += 'd = ' + str(d) + 'mult out: ' + str(i + 1) + ': c = ' + str(c) + '\n'
+        #print('mult out: ' + str(i) + ': c = ' + str(c))
+#g = open('/home/mechislav/image/info', 'w')
+#g.write(info)
+#g.close()
 
-plt.plot(np.arange(1, 46, 1), speed, '.')
-plt.show()
-
-s = open('/home/mechislab/image/speed.txt', 'w')
-s.write(str(speed))
-s.close()
