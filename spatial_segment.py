@@ -7,23 +7,24 @@ import matplotlib.cm as cm
 from func_for_mult_spectr import mutipl_all
 
 start_time = time.time()
-quant_it = 600 # количество итераций
-quant_el = 300  # количество элементов
+quant_it = 100 # количество итераций
+quant_el = 100  # количество элементов
 quant_start_one = 0  # c этого элемента задаем начальные условия
 quant_start_end = quant_el  # на этом элементе заканчиваем задавать н.у. остальные элементы равны нулю
 value_start = 1.5  # значение начальных условий
-alpha = .6
+alpha = .2
 beta = .0
-d = .20014
+d = (1 - alpha)/(1 + np.cos(np.pi/(quant_el + 1))) - .001
 a = aa = .2
 f = mutipl_all(quant_el, alpha)
 info = ''
 speed = np.zeros(45)
 f_plot = np.zeros(45)
 for j in range(1):
-    for i in range(43, 44):
-        d = (f[i + 1] + f[i]) / 2
+    for i in range(0, 1):
+        #d = (f[i + 1] + f[i]) / 2
         f_plot[i] = d
+        d = .85
         # print('\n', 'alpha = ', alpha, ', d = ', d, ', beta = ', beta)
         print('\n', 'd = ', d, ', alpha = ', alpha, ', beta = ', beta)
 
@@ -32,6 +33,13 @@ for j in range(1):
         matrix = segment_function.segment(quant_el, quant_it, quant_start_one, quant_start_end, value_start, a=a, d=d,
                                           alpha=alpha, beta=beta,
                                           nonlinear=nonlinear)  # вызываем функцию, которая возвращает матрицу с реализацией
+        
+        fil = open('matrix', 'w')
+        fil.write(str(matrix[40]))
+        fil.close()
+        fil1 = open('matrix', 'w')
+        fil1.write(str(matrix[55]))
+        fil1.close()
         # системыc
 
         maxim = matrix.max()
@@ -89,15 +97,19 @@ for j in range(1):
         # plt.plot([0, quant_it], [0, 0], linestyle = '-', c = 'black', label = 'н.т.: u = 0')
         # plt.plot([0, quant_it], [1, 1], linestyle = '-', c = 'blue', label = 'н.т.: u =  1')
         # plt.plot([0, quant_it], [aa, aa], linestyle = '-', c = 'red', label = 'н.т.: u = a = ' + str(aa))
+        #plt.plot(x, matrix[20], '.', linestyle='-', label='21 элемент', color='blue', alpha=.5)
+        plt.plot(x, matrix[1], '.', linestyle='-', label='Второй элемент', color='red', alpha=.5)
         plt.plot(x, matrix[0], '.', linestyle='-', label='Первый элемент', color='black', alpha=.5)
+
         plt.legend()
         plt.xlabel('n - дискретное время')
         plt.ylabel('$U_j$ значение элемента')
         # plt.grid (True, color='black', alpha=.4, linestyle='--')
         plt.show ()
         plt.xlim([0, quant_it])
-        plt.savefig('/home/mechislav/image/var_ ' + '_ d = ' + str(d) + r'alpha = ' + str(alpha) + r'beta = ' + str(
-            beta) + '.png')
+       # plt.savefig('/home/mechislav/image/var_ ' + '_ d = ' + str(d) + r'alpha = ' + str(alpha) + r'beta = ' + str(
+            #beta) + '.png')
+        #plt.savefig('test')
         plt.close()
         alpha = round(alpha, 3)
         n = 0

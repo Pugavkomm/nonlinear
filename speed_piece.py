@@ -12,16 +12,17 @@ quant_el = 100  # количество элементов
 quant_start_one = 0  # c этого элемента задаем начальные условия
 quant_start_end = quant_el  # на этом элементе заканчиваем задавать н.у. остальные элементы равны нулю
 value_start = 1.5  # значение начальных условий
-alpha = .6
+alpha = .4
 beta = .0
 d = .20014
 a = aa = .2
 f = mutipl_all(quant_el, alpha)
 info = ''
-start = 4
-stop = 43
+start = 1
+stop = 36
 el = stop - start
 speed_plot = np.zeros(stop - start)
+errors = np.zeros(stop - start)
 f_plot = np.zeros(stop - start)
 for j in range(1):
     for i in range(start, stop):
@@ -49,10 +50,15 @@ for j in range(1):
                         speed.append(50/(l))
                         c += 50/l
                         it = l
+
                         break
                     else:
                         break
-        c = c/len(speed)
+
+        delta_c = .01/it
+        print(delta_c)
+        errors[i - start] = delta_c
+        print(errors    )
         speed_plot[i - start] = c
         info += 'd = ' + str(d) + 'mult out: ' + str(i + 1) + ': c = ' + str(c) + '\n'
         print('mult out: ' + str(i) + ': c = ' + str(c))
@@ -72,6 +78,8 @@ for j in range(1):
     plt.grid(True)
     plt.xlabel('количество мультипликаторов вне ед. окр.')
     plt.ylabel('скорость')
+
+
     fig = plt.subplot(2, 1, 2)
     plt.plot(f_plot, speed_plot, '.', color = 'black')
     plt.grid(True)

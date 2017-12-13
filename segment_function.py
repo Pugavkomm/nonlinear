@@ -10,10 +10,10 @@ def segment(quant_el=100, quant_it=110, quant_start_one=10, quant_start_end=50, 
             beta=0, nonlinear='cube'):
     elements = np.zeros((quant_el, quant_it))
     for i in range(9, 91):
-        elements[i][0] = .1
-   #elements[49][0] = .1
+        elements[i][0] = .0000001
+    #elements[49][0] = 1
     for i in range(quant_it - 1):
-        progress_bar.update_progress(i / (quant_it - 1), 'вычисление системы')
+        #progress_bar.update_progress(i / (quant_it - 1), 'вычисление системы')
         for j in range(quant_el):
             if j == 0:
                 elements[j][i + 1] = function.next_iter(a, d, 0, elements[j][i], elements[j + 1][i], alpha, beta,
