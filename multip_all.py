@@ -4,10 +4,10 @@ N =100
 alpha = .2
 d = .0
 m = 0
-var_d = np.arange(.96,.97,.0001)
+var_d = np.arange(.2,.97,.0001)
 
-for i in range(0,1):
-    d = .9691
+for i in range(1):
+    d = .4
     y = np.zeros(N)
     mu = np.zeros(N)
     x = np.zeros(N)
@@ -18,7 +18,8 @@ for i in range(0,1):
         if i == 74:
             print('cos = ', z, ', mu = ', 1 - 2*d - 2*alpha - 2*z*d)
         y[i] = np.log(abs(1 - 2*d - 2*alpha - 2*z*d))
-        mu[i] = (1 - 2*d - 2*alpha - 2*z*d)
+        mu[i] = (1  - 2*alpha - 2*d*(1 + np.cos((i + 1)*np.pi/(N + 1))))
+        print(d)
         x[i] = i + 1
     sum = 0
     #mu[::-1].sort()
@@ -29,8 +30,9 @@ for i in range(0,1):
         if i == N - 1:
             plt.plot([x[i], x[i]], [0, y[i]], color='black', label = 'ляпуновские показатели')
             plt.plot(x[i], mu[i], '.', color='black', label = 'мультипликаторы')
-        plt.plot([x[i], x[i]], [0, y[i]], color = 'black')
-        plt.plot(x[i], mu[i], '.', color = 'black')
+        else:
+            plt.plot([x[i], x[i]], [0, y[i]], color = 'black')
+            plt.plot(x[i], mu[i], '.', color = 'black')
 
         #if i == N - 1:
             #plt.plot([x[i], x[i]], [0, np.log(abs(y[i]))], color = 'black', label = 'ляпуновские показатели')
@@ -43,11 +45,11 @@ for i in range(0,1):
     plt.xlabel('Номер')
     plt.ylabel('Значение')
     print(d)
-    plt.show()
+    #plt.show()
     m += 1
-    #plt.savefig('/home/mechislav/multipl/im_d_' + str(m))
+    plt.savefig('/home/mechislav/multipl/im_d_' + str(m))
     plt.close()
-'''
+
 
 x = np.arange(0, 1, .001)
 y = np.zeros(len(x))
@@ -61,16 +63,17 @@ plt.plot(x,y)
 plt.xlabel(r'$\alpha$')
 plt.ylabel('d')
 plt.yticks([])
-plt.text(0.4, 0.4, 'Хаотическая динамика', fontsize=11  ,
+plt.xticks([])
+plt.text(0.4, 0.4, 'D1', fontsize=11  ,
          # выравнивание по вертикали и по горизонтали по центру
          horizontalalignment='left', verticalalignment='center',
          bbox=dict(facecolor='pink', alpha=0.5))
-plt.text(0.0, 0.1, 'Регулярная динамика', fontsize=11,
+plt.text(0.0, 0.1, 'D2', fontsize=11,
          # выравнивание по вертикали и по горизонтали по центру
          horizontalalignment='left', verticalalignment='center',
          bbox=dict(facecolor='pink', alpha=0.5))
 plt.text(.6, .2, r'            $\frac{1 - \alpha}{1 + z_1}$', fontsize = 11, rotation=47)
-
+plt.grid(True)
 plt.show()
 
 
@@ -78,4 +81,3 @@ for i in range(N):
     print(round(f[i],6))
 
 
-'''

@@ -8,11 +8,11 @@ from func_for_mult_spectr import mutipl_all
 
 start_time = time.time()
 quant_it = 100 # количество итераций
-quant_el = 100  # количество элементов
+quant_el = 50  # количество элементов
 quant_start_one = 0  # c этого элемента задаем начальные условия
 quant_start_end = quant_el  # на этом элементе заканчиваем задавать н.у. остальные элементы равны нулю
 value_start = 1.5  # значение начальных условий
-alpha = .2
+alpha = .6
 beta = .0
 d = (1 - alpha)/(1 + np.cos(np.pi/(quant_el + 1))) - .001
 a = aa = .2
@@ -24,7 +24,7 @@ for j in range(1):
     for i in range(0, 1):
         #d = (f[i + 1] + f[i]) / 2
         f_plot[i] = d
-        d = .85
+        d = .3
         # print('\n', 'alpha = ', alpha, ', d = ', d, ', beta = ', beta)
         print('\n', 'd = ', d, ', alpha = ', alpha, ', beta = ', beta)
 
@@ -34,12 +34,11 @@ for j in range(1):
                                           alpha=alpha, beta=beta,
                                           nonlinear=nonlinear)  # вызываем функцию, которая возвращает матрицу с реализацией
         
-        fil = open('matrix', 'w')
-        fil.write(str(matrix[40]))
-        fil.close()
-        fil1 = open('matrix', 'w')
-        fil1.write(str(matrix[55]))
-        fil1.close()
+        #fil.write(str(matrix[40]))
+        #fil.close()
+        #fil1 = open('matrix', 'w')
+        #fil1.write(str(matrix[55]))
+        #fil1.close()
         # системыc
 
         maxim = matrix.max()
