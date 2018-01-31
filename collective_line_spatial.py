@@ -42,11 +42,11 @@ def line_plot(start, alpha, d, beta, N, quant_it):
 
 
 N = 100
-alpha = 0.6
+alpha = 0.2
 d = .2
 beta = 0
-start, quant_it = 8000, 8300
-var_d = np.arange(0.2, .45, 0.005)
+start, quant_it = 60000, 62000
+var_d = np.arange(0.2, .484, 0.005)
 for i in range(len(var_d)):
     progress_bar.update_progress((i) / (len(var_d)), 'PROGRESS')
     d = var_d[i]
@@ -54,5 +54,5 @@ for i in range(len(var_d)):
     line_plot(start, alpha, d, beta, N, quant_it)
     plt.title('d = ' + str(d))
     #plt.grid(True)
-    plt.savefig('/media/mechislav/fa2c6b1c-fee1-4c9f-b228-76576b998081/line/img' + str(i + 1))
+    plt.savefig('/home/mechislab/line/img' + str(i + 1))
     plt.close()

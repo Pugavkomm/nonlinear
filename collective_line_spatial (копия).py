@@ -40,7 +40,7 @@ N = 100
 alpha = 0.6
 d = .2
 beta = 0
-start, quant_it = 8000, 8300
+start, quant_it = 60000, 63000
 var_d = np.arange(0.2, .45, 0.005)
 y = np.zeros(len(var_d))
 for i in range(len(var_d)):
