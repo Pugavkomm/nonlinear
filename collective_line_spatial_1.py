@@ -34,15 +34,14 @@ def line_plot(start, alpha, d, beta, N, quant_it):
     print(mine)
     #plt.ylabel([-.001,.001])
     return mine
-    
 
 
 N = 100
+alpha = 0.6
 d = .2
-alpha = 0.2
 beta = 0
-start, quant_it = 90000, 300000
-var_d = np.arange(0.395, .48, 0.0005)
+start, quant_it = 80000, 90000
+var_d = np.arange(0.2, .35, 0.001)
 y = np.zeros(len(var_d))
 for i in range(len(var_d)):
     progress_bar.update_progress((i) / (len(var_d)), 'PROGRESS')
@@ -50,14 +49,9 @@ for i in range(len(var_d)):
     # var = par(alpha, d, beta, N, quant_it)
     
     y[i] = line_plot(start, alpha, d, beta, N, quant_it)
-f = open('var_d', 'w')
-f.write(str(y))
-f.close()
 plt.plot(var_d, y)
 plt.xlabel('d')
 plt.ylabel('длинна интервала')
 plt.title(r'$\alpha = $' + str(alpha) + r'$\beta = $' + str(beta))
-plt.savefig('save_line')
 plt.show()
-
     

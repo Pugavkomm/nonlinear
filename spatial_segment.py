@@ -12,7 +12,7 @@ quant_el = 100  # количество элементов
 quant_start_one = 0  # c этого элемента задаем начальные условия
 quant_start_end = quant_el  # на этом элементе заканчиваем задавать н.у. остальные элементы равны нулю
 value_start = 1.5  # значение начальных условий
-alpha = .2
+alpha = .6
 beta = .0
 d = (1 - alpha)/(1 + np.cos(np.pi/(quant_el + 1))) - .001
 a = aa = .2
@@ -20,6 +20,7 @@ f = mutipl_all(quant_el, alpha)
 info = ''
 speed = np.zeros(45)
 f_plot = np.zeros(45)
+
 for j in range(1):
     for i in range(0, 1):
         #d = (f[i + 1] + f[i]) / 2
